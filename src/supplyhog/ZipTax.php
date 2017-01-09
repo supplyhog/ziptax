@@ -15,6 +15,22 @@ class ZipTax
 {
 
 	/**
+	 * Success Code returned via rCode.
+	 */
+	const SUCCESS_CODE = 100;
+
+	/**
+	 * Error Codes returned via rCode with error response.
+	 */
+	const ERROR_CODES = [
+		101 => 'Invalid Key',
+		102 => 'Invalid State',
+		103 => 'Invalid City',
+		104 => 'Invalid Postal Code',
+		105 => 'Invalid Format',
+	];
+
+	/**
 	 * @access protected
 	 * @var string
 	 */
@@ -66,16 +82,6 @@ class ZipTax
 		}
 	}
 
-	const SUCCESS_CODE = 100;
-
-	const ERROR_CODES = [
-		101 => 'Invalid Key',
-		102 => 'Invalid State',
-		103 => 'Invalid City',
-		104 => 'Invalid Postal Code',
-		105 => 'Invalid Format',
-	];
-
 	/**
 	 * Runs a curl request to the API
 	 *
@@ -123,7 +129,31 @@ class ZipTax
 	}
 
 	/**
-	 * Request the API for a rate by a given postal code
+	 * Request the API for a rate by a given postal code, city, and state.
+	 * Example Return:
+	 * [
+	 *  'version" => 'v20',
+	 *  'rCode' => 100,
+	 *  'results' => [
+	 *      'geoPostalCode' => '90210',
+	 *      'geoCity' => 'BEVERLY HILLS',
+	 *      'geoCounty' => 'LOS ANGELES',
+	 *      'geoState' => 'CA',
+	 *      'taxSales' => 0.087499998509884,
+	 *      'taxUse' => 0.087499998509884,
+	 *      'txbService' => 'N',
+	 *      'stateSalesTax' => 0.059999998658895,
+	 *      'stateUseTax' => 0.059999998658895,
+	 *      'citySalesTax' => 0,
+	 *      'cityUseTax' => 0,
+	 *      'cityTaxCode => '',
+	 *      'countySalesTax' => 0.0024999999441206,
+	 *      'countyUseTax' => 0.0024999999441206,
+	 *      'countyTaxCode => '19',
+	 *      'districtSalesTax' => 0.025000000372529,
+	 *      'districtUseTax' => 0.025000000372529
+	 *  ]
+	 * ]
 	 *
 	 * @access public
 	 * @param string $postalCode | The 5 digit postal code. NOTE: Include leading zeros
