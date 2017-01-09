@@ -1,8 +1,6 @@
 {
   "name" : "supplyhog/ziptax",
   "description" : "A PHP wrapper for the zip-tax.com API.",
-  "version" : "2.0.0",
-  "minimum-stability": "dev",
   "type" : "library",
   "keywords" : ["vutran", "zip-tax", "tax", "zipcode", "postal code", "tax rate"],
   "homepage" : "https://github.com/supplyhog/php-ziptax",
